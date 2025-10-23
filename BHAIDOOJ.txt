@@ -1,0 +1,1289 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Bhai Dooj Experience | Anamika & Mahima</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 50%, #ffe8f0 100%);
+            color: #8a4b76;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Enhanced Petals with Multiple Colors */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+        }
+
+        .petal:nth-child(3n) {
+            background: linear-gradient(135deg, #ffb6c1, #ff8fb1);
+        }
+        .petal:nth-child(3n+1) {
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+        }
+        .petal:nth-child(3n+2) {
+            background: linear-gradient(135deg, #ffe4ec, #ffd1dc);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Balloons */
+        .balloons-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            animation: balloonFloat 15s linear infinite;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: #8a4b76;
+        }
+
+        .balloon:nth-child(3n) { background: #ff8fb1; }
+        .balloon:nth-child(3n+1) { background: #ffb6c1; }
+        .balloon:nth-child(3n+2) { background: #ffd1dc; }
+
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Sparkles */
+        .sparkles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: gold;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+            box-shadow: 0 0 10px gold;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .slideshow-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 4;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Enhanced Memory Container - NO BORDER ROTATION */
+        .memory-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 1000px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 
+                0 25px 50px rgba(255, 182, 193, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.8),
+                0 0 50px rgba(255, 182, 193, 0.2) inset;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .memory-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1, #ffd1dc, #ffb6c1, #ff8fb1);
+            border-radius: 32px;
+            z-index: -1;
+        }
+
+        .memory-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shine 8s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Enhanced Typography - SMALLER TEXT */
+        .bhai-dooj-title {
+            font-size: 4rem;
+            color: #000000;
+            text-shadow: 
+                0 2px 10px rgba(255, 182, 193, 0.5),
+                0 4px 20px rgba(255, 182, 193, 0.3);
+            margin-bottom: 30px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            animation: titleMagic 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes titleMagic {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                text-shadow: 
+                    0 2px 10px rgba(255, 182, 193, 0.5),
+                    0 4px 20px rgba(255, 182, 193, 0.3);
+            }
+            50% { 
+                transform: scale(1.05) rotate(0.5deg);
+                text-shadow: 
+                    0 4px 20px rgba(255, 182, 193, 0.7),
+                    0 8px 30px rgba(255, 182, 193, 0.5),
+                    0 0 40px rgba(255, 182, 193, 0.3);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1, #ffd1dc, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 25px rgba(255, 182, 193, 0.3);
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            animation: headingGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes headingGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .memory-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #8a4b76;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .welcome-message {
+            font-size: 1.8rem;
+            line-height: 1.7;
+            margin: 40px 0;
+            text-align: center;
+            color: #8a4b76;
+            animation: messageFloat 4s ease-in-out infinite;
+            font-weight: 600;
+            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes messageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Enhanced Photo Slots */
+        .photos-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .photo-slot {
+            width: 240px;
+            height: 240px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #ffb6c1;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 
+                0 20px 40px rgba(255, 182, 193, 0.3),
+                0 0 30px rgba(255, 182, 193, 0.2) inset;
+            animation: photoSlotPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes photoSlotPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .photo-slot:hover {
+            transform: translateY(-15px) scale(1.08);
+            border-color: #ff8fb1;
+            box-shadow: 
+                0 30px 60px rgba(255, 143, 177, 0.4),
+                0 0 50px rgba(255, 182, 193, 0.3) inset;
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            border-radius: 22px;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-slot:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ff8fb1;
+            transition: all 0.6s ease;
+        }
+
+        .photo-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #ff8fb1;
+            filter: drop-shadow(0 5px 15px rgba(255, 143, 177, 0.4));
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 
+                0 10px 25px rgba(255, 143, 177, 0.4),
+                0 0 20px rgba(255, 255, 255, 0.5) inset;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .upload-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 
+                0 15px 35px rgba(255, 143, 177, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.6) inset;
+            letter-spacing: 2px;
+        }
+
+        .upload-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .upload-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 900px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1, #ffd1dc, #ffb6c1);
+            border-radius: 15px;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 
+                0 0 25px rgba(255, 143, 177, 0.5),
+                0 0 15px rgba(255, 255, 255, 0.8) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Enhanced Slide Indicators */
+        .slide-indicators {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .slide-indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255, 182, 193, 0.4);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 3px 15px rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .slide-indicator.active {
+            transform: scale(1.4);
+            box-shadow: 
+                0 0 20px #ff8fb1,
+                0 0 30px rgba(255, 143, 177, 0.5);
+        }
+
+        .slide-indicator.active::before {
+            transform: scale(1);
+        }
+
+        /* Magical Floating Elements */
+        .floating-heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: #ff8fb1;
+            animation: magicalFloat 8s linear forwards;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 0 10px rgba(255, 143, 177, 0.6));
+        }
+
+        @keyframes magicalFloat {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 1;
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Final Message Enhancement */
+        .final-message {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            text-align: center;
+            color: #8a4b76;
+            animation: finalMessageGlow 4s ease-in-out infinite;
+            font-weight: 500;
+            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes finalMessageGlow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 2px 15px rgba(255, 255, 255, 0.9);
+            }
+            50% { 
+                transform: scale(1.02);
+                text-shadow: 
+                    0 4px 25px rgba(255, 182, 193, 0.6),
+                    0 0 30px rgba(255, 255, 255, 1);
+            }
+        }
+
+        .signature {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-top: 40px;
+            background: linear-gradient(45deg, #ff6b93, #ff8fb1, #ffb6c1, #ffd1dc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 107, 147, 0.4);
+            animation: signatureMagic 3s ease-in-out infinite;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        @keyframes signatureMagic {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: scale(1.05) rotate(0.5deg);
+                filter: hue-rotate(20deg);
+            }
+        }
+
+        .auto-play-notice {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            color: #8a4b76;
+            z-index: 100;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 10px 30px rgba(255, 182, 193, 0.3),
+                0 0 20px rgba(255, 255, 255, 0.5) inset;
+            animation: noticePulse 2s ease-in-out infinite;
+            font-weight: 600;
+        }
+
+        @keyframes noticePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .welcome-icon {
+            font-size: 6rem;
+            margin: 25px 0;
+            background: linear-gradient(45deg, #ff8fb1, #ffb6c1, #ffd1dc, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: welcomeIconMagic 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 25px rgba(255, 182, 193, 0.5));
+        }
+
+        @keyframes welcomeIconMagic {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: hue-rotate(0deg) drop-shadow(0 10px 25px rgba(255, 182, 193, 0.5));
+            }
+            33% { 
+                transform: scale(1.1) rotate(5deg);
+                filter: hue-rotate(90deg) drop-shadow(0 15px 35px rgba(255, 182, 193, 0.7));
+            }
+            66% { 
+                transform: scale(1.05) rotate(-5deg);
+                filter: hue-rotate(180deg) drop-shadow(0 20px 40px rgba(255, 182, 193, 0.6));
+            }
+        }
+
+        /* Background Music Control */
+        .music-control {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            border-radius: 50%;
+            z-index: 100;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: musicPulse 3s ease-in-out infinite;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5);
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .music-control i {
+            font-size: 1.5rem;
+            color: #ff8fb1;
+        }
+
+        /* Fireworks Container */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .firework {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: fireworkExplode 1.5s ease-out forwards;
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Personal Message */
+        .personal-message {
+            font-size: 1.2rem;
+            color: #8a4b76;
+            margin-top: 30px;
+            font-style: italic;
+            text-align: center;
+            animation: messagePulse 3s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+
+        @keyframes messagePulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.02); opacity: 1; }
+        }
+
+        /* Enhanced Media Queries */
+        @media (max-width: 768px) {
+            .bhai-dooj-title {
+                font-size: 2.8rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .memory-text, .welcome-message {
+                font-size: 1.1rem;
+            }
+            
+            .photo-slot {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .memory-container {
+                padding: 30px 20px;
+            }
+            
+            .final-message {
+                font-size: 1.2rem;
+            }
+            
+            .signature {
+                font-size: 1.6rem;
+            }
+            
+            .welcome-icon {
+                font-size: 4rem;
+            }
+            
+            .personal-message {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="petals-container" id="petalsContainer"></div>
+    <div class="balloons-container" id="balloonsContainer"></div>
+    <div class="sparkles-container" id="sparklesContainer"></div>
+    <div class="fireworks-container" id="fireworksContainer"></div>
+
+    <div class="auto-play-notice">
+        <i class="fas fa-sync-alt"></i> Auto-changing every 8 seconds
+    </div>
+
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <div class="slideshow-container">
+        <!-- Slide 1: Welcome -->
+        <div class="slide active" id="slide1">
+            <div class="memory-container">
+                <div class="bhai-dooj-title">
+                    Happy Bhai Dooj 💝 🧿
+                </div>
+                <div class="welcome-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="welcome-message">
+                    <p>Dear Anamika Didi & Mahima,</p>
+                    <p>Welcome to your magical Bhai Dooj experience!</p>
+                    <p>Get ready for an unforgettable journey filled with love</p>
+                    <p>and beautiful memories made just for you both ✨</p>
+                </div>
+                <!-- No photo slots on first page -->
+            </div>
+        </div>
+        
+        <!-- Slide 2: Anamika Didi -->
+        <div class="slide" id="slide2">
+            <div class="memory-container">
+                <h1>Anamika Didi 🌸</h1>
+                <div class="memory-text">
+                    <p>To my incredible elder sister, your wisdom and kindness have always been my guiding light.</p>
+                    <p>You're not just my sister but my lifelong friend, mentor, and inspiration.</p>
+                </div>
+                <div class="photos-container">
+                    <div class="photo-slot">
+                        <img id="anamika-photo1" src="" alt="Anamika Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-star"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                    <div class="photo-slot">
+                        <img id="anamika-photo2" src="" alt="Anamika Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-heart"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Mahima -->
+        <div class="slide" id="slide3">
+            <div class="memory-container">
+                <h1>Mahima 💕</h1>
+                <div class="memory-text">
+                    <p>To my amazing sister, your vibrant spirit and laughter fill every moment with joy.</p>
+                    <p>You bring endless happiness, positivity, and light to our lives!</p>
+                </div>
+                <div class="photos-container">
+                    <div class="photo-slot">
+                        <img id="mahima-photo1" src="" alt="Mahima Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-gem"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                    <div class="photo-slot">
+                        <img id="mahima-photo2" src="" alt="Mahima Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-sun"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Together -->
+        <div class="slide" id="slide4">
+            <div class="memory-container">
+                <h1>Together Forever 🌟</h1>
+                <div class="memory-text">
+                    <p>Our bond is the most precious gift I could ever receive.</p>
+                    <p>Through every chapter of life, I'm blessed to have you both by my side.</p>
+                </div>
+                <div class="photos-container">
+                    <div class="photo-slot">
+                        <img id="together-photo1" src="" alt="Together Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-magic"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                    <div class="photo-slot">
+                        <img id="together-photo2" src="" alt="Together Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-sparkles"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Final Message -->
+        <div class="slide" id="slide5">
+            <div class="memory-container">
+                <h1>Happy Bhai Dooj! ✨</h1>
+                <div class="final-message">
+                    <p>Dear Anamika Didi and Mahima,</p>
+                    <p>On this beautiful occasion, I want to express my deepest gratitude</p>
+                    <p>for having you both in my life. You are my greatest blessings.</p>
+                    <p>Your love, support, and presence make every day magical.</p>
+                    <p>May our bond continue to grow stronger and more beautiful with time.</p>
+                    <p>Thank you for being the most incredible sisters anyone could ask for!</p>
+                    <p>With all my love and heart,</p>
+                </div>
+                <div class="signature">
+                    Your Annoying Brother Spider-Man 🕷️
+                </div>
+                
+                <!-- Personal Message -->
+                <div class="personal-message">
+                    Yaar iss baar utna acha nhi bann paya jitna soche the...<br>
+                    Next time isse 10x acha banenge promise! 💝
+                </div>
+                
+                <div class="photos-container">
+                    <div class="photo-slot">
+                        <img id="final-photo1" src="" alt="Final Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-crown"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                    <div class="photo-slot">
+                        <img id="final-photo2" src="" alt="Final Photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-moon"></i>
+                            <button class="upload-btn">Add Photo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slide-indicators" id="slideIndicators"></div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-gently-romantic-piano-578.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Current slide tracking
+        let currentSlide = 1;
+        const totalSlides = 5;
+        let slideInterval;
+        const slideDuration = 8000; // 8 seconds per slide
+        let musicPlaying = false;
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let fireworksActive = false;
+
+        // Create enhanced falling petals
+        function createPetals() {
+            const container = document.getElementById('petalsContainer');
+            for (let i = 0; i < 40; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                petal.style.animationDelay = `${Math.random() * 8}s`;
+                petal.style.opacity = `${Math.random() * 0.6 + 0.4}`;
+                petal.style.width = `${Math.random() * 20 + 15}px`;
+                petal.style.height = petal.style.width;
+                container.appendChild(petal);
+            }
+        }
+
+        // Create floating balloons
+        function createBalloons() {
+            const container = document.getElementById('balloonsContainer');
+            for (let i = 0; i < 15; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.animationDuration = `${Math.random() * 20 + 15}s`;
+                balloon.style.animationDelay = `${Math.random() * 10}s`;
+                container.appendChild(balloon);
+            }
+        }
+
+        // Create sparkling effects
+        function createSparkles() {
+            const container = document.getElementById('sparklesContainer');
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Create fireworks
+        function createFireworks() {
+            if (fireworksActive) return;
+            fireworksActive = true;
+            
+            const container = document.getElementById('fireworksContainer');
+            const colors = ['#ff8fb1', '#ffb6c1', '#ffd1dc', '#ff6b93', '#ff8fb1', '#ffb6c1'];
+            
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    createFireworkBurst(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight / 2,
+                        colors[Math.floor(Math.random() * colors.length)]
+                    );
+                }, i * 800);
+            }
+            
+            setTimeout(() => {
+                fireworksActive = false;
+            }, 10000);
+        }
+
+        function createFireworkBurst(x, y, color) {
+            const container = document.getElementById('fireworksContainer');
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            
+            const particleCount = 80;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+                
+                const angle = (i / particleCount) * Math.PI * 2;
+                const distance = 100 + Math.random() * 150;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                
+                firework.appendChild(particle);
+            }
+            
+            container.appendChild(firework);
+            
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+
+        // Initialize slideshow
+        function initSlideshow() {
+            createPetals();
+            createBalloons();
+            createSparkles();
+            createSlideIndicators();
+            setupPhotoUploads();
+            setupMusicControl();
+            startAutoPlay();
+            loadSavedPhotos();
+            
+            // Create magical effects occasionally
+            setInterval(createRandomHearts, 2000);
+            setInterval(createSparkleBurst, 5000);
+        }
+
+        // Setup music control
+        function setupMusicControl() {
+            const musicControl = document.getElementById('musicControl');
+            musicControl.addEventListener('click', function() {
+                if (musicPlaying) {
+                    backgroundMusic.pause();
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
+                    musicControl.style.background = 'rgba(255, 255, 255, 0.9)';
+                } else {
+                    backgroundMusic.play().catch(e => console.log('Audio play failed:', e));
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                    musicControl.style.background = 'linear-gradient(45deg, #ff8fb1, #ffb6c1)';
+                }
+                musicPlaying = !musicPlaying;
+            });
+        }
+
+        // Create sparkle burst effect
+        function createSparkleBurst() {
+            const container = document.getElementById('sparklesContainer');
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = `${Math.random() * 100}%`;
+                    sparkle.style.top = `${Math.random() * 100}%`;
+                    sparkle.style.animation = 'sparkle 1.5s ease-out';
+                    container.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1500);
+                }, i * 100);
+            }
+        }
+
+        // Setup photo upload functionality
+        function setupPhotoUploads() {
+            const uploadButtons = document.querySelectorAll('.upload-btn');
+            uploadButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*';
+                    fileInput.style.display = 'none';
+                    
+                    fileInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                // Find the closest photo slot
+                                const photoSlot = button.closest('.photo-slot');
+                                const img = photoSlot.querySelector('img');
+                                img.src = e.target.result;
+                                img.style.display = 'block';
+                                
+                                // Hide the placeholder
+                                const placeholder = photoSlot.querySelector('.photo-placeholder');
+                                placeholder.style.display = 'none';
+                                
+                                // Save to localStorage
+                                const slideNumber = getSlideNumber(photoSlot);
+                                const photoIndex = Array.from(photoSlot.parentElement.children).indexOf(photoSlot);
+                                const storageKey = `photo-${slideNumber}-${photoIndex}`;
+                                localStorage.setItem(storageKey, e.target.result);
+                                
+                                // Create celebration effect
+                                createHearts(8);
+                                createSparkleBurst();
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    
+                    document.body.appendChild(fileInput);
+                    fileInput.click();
+                    document.body.removeChild(fileInput);
+                });
+            });
+        }
+
+        // Get slide number from photo slot
+        function getSlideNumber(photoSlot) {
+            const slide = photoSlot.closest('.slide');
+            const slideId = slide.id;
+            return parseInt(slideId.replace('slide', ''));
+        }
+
+        // Create slide indicators
+        function createSlideIndicators() {
+            const indicatorsContainer = document.getElementById('slideIndicators');
+            for (let i = 1; i <= totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'slide-indicator';
+                if (i === 1) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(indicator);
+            }
+        }
+
+        // Start auto-play
+        function startAutoPlay() {
+            slideInterval = setInterval(nextSlide, slideDuration);
+            updateProgressBar();
+        }
+
+        // Go to specific slide
+        function goToSlide(slideNumber) {
+            // Reset auto-play
+            clearInterval(slideInterval);
+            
+            document.getElementById(`slide${currentSlide}`).classList.remove('active');
+            currentSlide = slideNumber;
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
+            updateSlideIndicators();
+            
+            // Restart auto-play
+            startAutoPlay();
+            
+            // Create celebration effect on final slide
+            if (slideNumber === totalSlides) {
+                setTimeout(() => {
+                    createFireworks();
+                }, 2000);
+                createHearts(15);
+                createSparkleBurst();
+            }
+        }
+
+        // Next slide
+        function nextSlide() {
+            let nextSlide = currentSlide + 1;
+            if (nextSlide > totalSlides) nextSlide = 1;
+            goToSlide(nextSlide);
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = '0%';
+            
+            let width = 0;
+            const interval = slideDuration / 100;
+            const increment = 100 / (slideDuration / interval);
+            
+            const progressInterval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(progressInterval);
+                } else {
+                    width += increment;
+                    progressBar.style.width = width + '%';
+                }
+            }, interval);
+        }
+
+        // Update slide indicators
+        function updateSlideIndicators() {
+            const indicators = document.querySelectorAll('.slide-indicator');
+            indicators.forEach((indicator, index) => {
+                if (index + 1 === currentSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        // Load saved photos from localStorage
+        function loadSavedPhotos() {
+            const photoSlots = document.querySelectorAll('.photo-slot');
+            photoSlots.forEach((slot) => {
+                const slideNumber = getSlideNumber(slot);
+                const photoIndex = Array.from(slot.parentElement.children).indexOf(slot);
+                const storageKey = `photo-${slideNumber}-${photoIndex}`;
+                const savedPhoto = localStorage.getItem(storageKey);
+                
+                if (savedPhoto) {
+                    const img = slot.querySelector('img');
+                    img.src = savedPhoto;
+                    img.style.display = 'block';
+                    slot.querySelector('.photo-placeholder').style.display = 'none';
+                }
+            });
+        }
+
+        // Create magical floating hearts
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.top = `${Math.random() * 100 + 100}%`;
+                    heart.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
+                    heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, i * 200);
+            }
+        }
+
+        // Create random hearts occasionally
+        function createRandomHearts() {
+            if (Math.random() > 0.8) {
+                createHearts(1);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initSlideshow);
+
+        // Add click effects
+        document.addEventListener('click', function(e) {
+            createHearts(1);
+            createSparkleBurst();
+        });
+    </script>
+</body>
+</html>
